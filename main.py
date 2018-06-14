@@ -1,10 +1,10 @@
 import xlrd
 import csv
 
-def csv_from_excel():
-    wb = xlrd.open_workbook('sample.xlsx')
-    sh = wb.sheet_by_index(0) #wb.sheet_by_name('Hoja1')
-    your_csv_file = open('your_csv_file.csv', 'wb')
+def excelToCsv(inputFile, page, outputFile):
+    wb = xlrd.open_workbook(inputFile)
+    sh = wb.sheet_by_index(page) #filewb.sheet_by_name('Hoja1')
+    your_csv_file = open(outputFile, 'wb')
     wr = csv.writer(your_csv_file, quoting=csv.QUOTE_ALL)
 
     for rownum in xrange(sh.nrows):
@@ -12,4 +12,4 @@ def csv_from_excel():
 
     your_csv_file.close()
 
-csv_from_excel()
+excelToCsv('sample.xlsx', 0, 'your_csv_file.csv')
