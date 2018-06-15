@@ -2,6 +2,7 @@ import xlrd
 import csv
 from numbers import Number
 import os.path
+import json
 
 ''' Configurations, this values will change the behaivor of the script
 and the way it interacts with the user
@@ -45,5 +46,13 @@ def excelToCsv(inputFile, sheet, outputFile):
         wr.writerow(sh.row_values(rownum))
 
     cvsFile.close()
+
+    # Output for the user
+    output = {}
+    output['originalFile'] = inputFile
+    output['createdFile'] = outputFile
+    output['rows'] = sh.nrows
+
+    print(json.dumps(output, sort_keys=True, indent=4))
 
 excelToCsv('sample.xlsx', 'Hoja1', 'your_csv_file.csv')
